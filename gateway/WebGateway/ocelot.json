@@ -13,7 +13,7 @@
       "UpstreamHttpMethod": ["Get", "Options"]
     },
     {
-      "DownstreamPathTemplate": "/",
+      "DownstreamPathTemplate": "/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -21,7 +21,7 @@
           "Port": 8080
         }
       ],
-      "UpstreamPathTemplate": "/",
+      "UpstreamPathTemplate": "/{everything}",
       "UpstreamHttpMethod": ["Get", "Options"]
     }
   ],
