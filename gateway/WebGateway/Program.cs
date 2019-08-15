@@ -41,6 +41,8 @@ namespace WebGateway
               .ConfigureLogging((hostingContext, logging) =>
               {
                 logging.AddConsole();
+                logging.AddDebug();
+                logging.AddEventSourceLogger();
               })
               .UseIISIntegration()
               .Build();
