@@ -34,6 +34,17 @@ namespace WebGateway
                 app.UseDeveloperExceptionPage();
             }
 
+            app.Use(async (context, next) =>
+            {
+                if (context.Request.Path == "/")
+                {
+                    context.Response.Redirect("/#/", permanent: false);
+                    return;
+                }
+
+                await next();
+            });
+
             app.UseMvc();
         }
     }
