@@ -1,0 +1,29 @@
+{
+  "ReRoutes": [
+    {
+      "DownstreamPathTemplate": "/api/users/list",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "vueexppg.backend",
+          "Port": 3000
+        }
+      ],
+      "UpstreamPathTemplate": "/v1/api/users/list",
+      "UpstreamHttpMethod": ["Get", "Options"]
+    },
+    {
+      "DownstreamPathTemplate": "/",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "vueexppg.frontend",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/",
+      "UpstreamHttpMethod": ["Get", "Options"]
+    }
+  ],
+  "GlobalConfiguration": {}
+}

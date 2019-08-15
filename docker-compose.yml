@@ -1,0 +1,58 @@
+version: "3"
+
+services:
+  vueexppg.db:
+    image: postgres
+    container_name: vueexppg_db
+    hostname: vueexppg.db
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: devrocks
+      POSTGRES_USER: dev01
+      POSTGRES_DB: vueexppg
+    ports:
+      - "5432:5432"
+    volumes:
+      - vueexppg_pg_db:/var/lib/postgresql/data:Z
+      - ./postgresql/001_tables:/go-social/sql/001_tables
+      - ./postgresql/boot.sh:/docker-entrypoint-initdb.d/boot.sh
+  vueexppg.backend:
+    image: vueexppg/backend
+    container_name: vueexppg_backend
+    hostname: vueexppg.backend
+    build:
+      context: ./backend
+    ports:
+      - "52791:3000"
+    environment:
+      "PUBLIC_PORT": "52791"
+    links:
+      - vueexppg.db
+    depends_on:
+      - vueexppg.db
+  vueexppg.frontend:
+    image: vueexppg/frontend
+    container_name: vueexppg_frontend
+    hostname: vueexppg.frontend
+    build:
+      context: ./frontend
+    ports:
+      - "52792:8080"
+  vueexppg.gateway:
+    image: vueexppg/gateway
+    container_name: vueexppg-gateway
+    build:
+      context: ./gateway/WebGateway
+    ports:
+      - "52793:80"
+    links:
+      - vueexppg.frontend
+      - vueexppg.backend
+      - vueexppg.db
+    depends_on:
+      - vueexppg.frontend
+      - vueexppg.backend
+      - vueexppg.db
+
+volumes:
+  vueexppg_pg_db:

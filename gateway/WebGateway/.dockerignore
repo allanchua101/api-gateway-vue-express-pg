@@ -1,0 +1,5 @@
+bin/
+obj/
+!*.dll
+!obj/Docker/publish/*
+!obj/Docker/empty/

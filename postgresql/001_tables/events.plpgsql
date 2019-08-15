@@ -1,0 +1,7 @@
+CREATE TABLE events (
+  "id"          UUID          NOT NULL,
+  "data"        JSONB         NOT NULL,
+  "created_at"  TIMESTAMP     NOT NULL DEFAULT now(),
+  "aggregate"   VARCHAR(500)  NOT NULL,
+  CONSTRAINT "events_pk" PRIMARY KEY ("id")
+);
