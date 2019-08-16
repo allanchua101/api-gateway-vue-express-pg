@@ -30,5 +30,11 @@ Run the following on the project root directory:
 docker-compose up
 ```
 
+## Access GUI
+
+To access GUI, navigate to [http://localhost:52793](http://localhost:52793)  
+
+To hit an API, navigate to [http://localhost:52793/v1/api/users/list](http://localhost:52793/v1/api/users/list)
+
 ### TLDR;
 I'm writing about API gateways in my blog @ [https://www.pogsdotnet.com](https://www.pogsdotnet.com)
