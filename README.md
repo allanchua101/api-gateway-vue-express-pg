@@ -1,5 +1,7 @@
 # API Gateway + Vue JS + Express + PostgreSQL 
 
+![Stack Diagram](https://github.com/allanchua101/api-gateway-vue-express-pg/blob/master/Stack%20Diagram.png "Stack Diagram")
+
 This repository showcases an API gateway fronting an app that uses Vue JS, Express and PostgreSQL. Each piece of architecture is running isolated on their own container.
 
 ## Pre-requisites
