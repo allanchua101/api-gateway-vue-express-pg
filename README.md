@@ -4,10 +4,21 @@ This repository showcases an API gateway fronting an app that uses Vue JS, Expre
 
 ## Pre-requisites
 
+The following items should be installed on your machine:
+
 - Docker          (Containerization)
 - Docker Compose  (Service Orchestration Locally)
-- NodeJS          (API Development)
+- NodeJS          (API and GUI Development)
 - .NET Core       (API Gateway Development)
+
+## Technology Stack
+
+- .NET Core
+- Node JS
+- VueJS
+- Express JS
+- Ocelot
+- PostgreSQL
 
 ## Running Application
 
