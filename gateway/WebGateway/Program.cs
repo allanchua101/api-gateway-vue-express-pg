@@ -5,6 +5,8 @@ using Microsoft.Extensions.Logging;
 using Ocelot.Middleware;
 using Ocelot.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using System.Diagnostics;
 
 namespace WebGateway
 {
@@ -36,7 +38,20 @@ namespace WebGateway
               .Configure(app =>
               {
                 app.UseStaticFiles();
-                app.UseOcelot().Wait();
+                app.UseOcelot(new OcelotPipelineConfiguration()
+                {
+                    PreErrorResponderMiddleware = async (ctx, next) =>
+                    {
+                        if (ctx.HttpContext.Request.Path.Equals(new PathString("/healthcheck")))
+                        {
+                            await ctx.HttpContext.Response.WriteAsync("API Gateway is OK");
+                        }
+                        else
+                        {
+                            await next.Invoke();
+                        }
+                    }
+                }).Wait();
               })
               .ConfigureLogging((hostingContext, logging) =>
               {
