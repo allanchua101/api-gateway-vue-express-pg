@@ -37,7 +37,7 @@ services:
     build:
       context: ./frontend
     ports:
-      - "52792:8080"
+      - "52792:80"
   vueexppg.gateway:
     image: vueexppg/gateway
     container_name: vueexppg-gateway
