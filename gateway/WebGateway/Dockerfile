@@ -10,7 +10,7 @@ COPY . ./
 RUN dotnet publish -c Release -o out
 
 # Build runtime image
-FROM microsoft/dotnet-nightly:2.1-runtime-alpine
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.2.6-alpine3.9 AS runtime
 EXPOSE 80
 WORKDIR /app
 COPY --from=build-env /app/out .
