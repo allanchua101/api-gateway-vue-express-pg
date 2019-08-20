@@ -58,7 +58,7 @@ Resources:
         Subnets: !GetAtt VPC.Outputs.PublicSubnets
         SecurityGroup: !GetAtt SecurityGroups.Outputs.LoadBalancerSecurityGroup
 
- ECS:
+  ECS:
     Type: AWS::CloudFormation::Stack
     Properties:
       TemplateURL: !Sub
