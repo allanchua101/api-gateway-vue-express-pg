@@ -42,7 +42,7 @@ To access GUI, navigate to [http://localhost:52793](http://localhost:52793)
 
 To hit an API, navigate to [http://localhost:52793/v1/api/users/list](http://localhost:52793/v1/api/users/list)
 
-## Manually Deploy Cloud Formation Stack via AWS CLI
+## Manually Deploy Cloud Formation Stack via AWS CLI :cloud:
 
 ```sh
 # NOTE: This repository is still under development and compilation of 
