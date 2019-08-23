@@ -4,7 +4,7 @@ This repository showcases an API gateway fronting an app that uses Vue JS, Expre
 
 ## How it looks like in local
 
-TODO: Add diagram for local development
+![Local Stack Diagram](https://github.com/allanchua101/api-gateway-vue-express-pg/blob/master/VueJS%20Express%20Ocelot%20Local.png "Local Stack Diagram")
 
 ## How it will look like in AWS
 
