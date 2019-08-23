@@ -14,19 +14,19 @@ TODO: Add diagram for local development
 
 The following items should be installed on your machine:
 
-- Docker          (Containerization)
-- Docker Compose  (Service Orchestration Locally)
-- NodeJS          (API and GUI Development)
-- .NET Core       (API Gateway Development)
+:heavy_check_mark: Docker          (Containerization)  
+:heavy_check_mark: Docker Compose  (Service Orchestration Locally)  
+:heavy_check_mark: NodeJS          (API and GUI Development)  
+:heavy_check_mark: .NET Core       (API Gateway Development)  
 
 ## Technology Stack
 
-- .NET Core
-- Node JS
-- VueJS
-- Express JS
-- Ocelot
-- PostgreSQL
+:heavy_check_mark: .NET Core  
+:heavy_check_mark: Node JS  
+:heavy_check_mark: VueJS  
+:heavy_check_mark: Express JS  
+:heavy_check_mark: Ocelot  
+:heavy_check_mark: PostgreSQL  
 
 ## Running Application
 
