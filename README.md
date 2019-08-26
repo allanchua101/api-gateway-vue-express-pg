@@ -50,7 +50,8 @@ The script below is used for automating deployment of Infrastructure. I'm still 
 # Navigate to scripts folder and run the following command
 aws cloudformation create-stack --stack-name my-stack-name \ 
   --template-body file://root-stack.yml --profile YOUR_AWS_PROFILE_NAME \ 
-  --parameters ParameterKey=TemplateS3BucketUrl,ParameterValue=YOUR_S3_URL_HERE
+  --parameters ParameterKey=TemplateS3BucketUrl,ParameterValue=YOUR_S3_URL_HERE \
+  --capabilities CAPABILITY_NAMED_IAM
 ```
 
 ### TLDR;
