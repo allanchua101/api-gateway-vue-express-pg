@@ -42,7 +42,8 @@ To hit an API, navigate to [http://localhost:52793/v1/api/users/list](http://loc
 # Navigate to scripts folder and run the following command
 aws cloudformation create-stack --stack-name my-stack-name \ 
   --template-body file://root-stack.yml --profile YOUR_AWS_PROFILE_NAME \ 
-  --parameters ParameterKey=TemplateS3BucketUrl,ParameterValue=YOUR_S3_URL_HERE
+  --parameters ParameterKey=TemplateS3BucketUrl,ParameterValue=YOUR_S3_URL_HERE \
+  --capabilities CAPABILITY_IAM
 ```
 
 ### TLDR;
