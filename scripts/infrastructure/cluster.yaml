@@ -170,6 +170,7 @@ Resources:
                     "Resource": "*"
                 }]
             }
+            
   ECSInstanceProfile:
     Type: AWS::IAM::InstanceProfile
     Properties:
