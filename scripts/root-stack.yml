@@ -22,6 +22,15 @@ Parameters:
     Description: URL of s3 bucket that will contain the cloud formation scripts. (eg. https://s3.amazonaws.com/YOUR_S3_BUCKET_NAME)
 
 Resources:
+  ContainerECR:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: !Sub
+        - ${TemplateS3BucketUrl}/infrastructure/ecr.yaml
+        - { TemplateS3BucketUrl: !Ref TemplateS3BucketUrl }
+      Parameters:
+        EnvironmentName: !Ref AWS::StackName
+
   VPC:
     Type: AWS::CloudFormation::Stack
     Properties:
@@ -64,6 +73,7 @@ Resources:
       TemplateURL: !Sub
         - ${TemplateS3BucketUrl}/infrastructure/cluster.yaml
         - { TemplateS3BucketUrl: !Ref TemplateS3BucketUrl }
+      DependsOn: ContainerECR
       Parameters:
         EnvironmentName: !Ref AWS::StackName
         InstanceType: t2.micro
