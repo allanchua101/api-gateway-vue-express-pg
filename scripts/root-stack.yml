@@ -73,7 +73,6 @@ Resources:
       TemplateURL: !Sub
         - ${TemplateS3BucketUrl}/infrastructure/cluster.yaml
         - { TemplateS3BucketUrl: !Ref TemplateS3BucketUrl }
-      DependsOn: ContainerECR
       Parameters:
         EnvironmentName: !Ref AWS::StackName
         InstanceType: t2.micro
@@ -81,6 +80,7 @@ Resources:
         VPC: !GetAtt VPC.Outputs.VPC
         SecurityGroup: !GetAtt SecurityGroups.Outputs.ECSHostSecurityGroup
         Subnets: !GetAtt VPC.Outputs.PrivateSubnets
+    DependsOn: ContainerECR
 
   LifecycleHook:
     Type: AWS::CloudFormation::Stack
