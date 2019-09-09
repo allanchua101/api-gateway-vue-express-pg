@@ -59,4 +59,6 @@ I'm writing about API gateways in my blog @ [https://www.pogsdotnet.com](https:/
   
 ### Buy me a beer so I can code more? :beer:
 
+If your'e happy with my repository, I don't take TYs, send me a beer instead :smile:
+
 ![QR Code](https://github.com/allanchua101/api-gateway-vue-express-pg/blob/master/QR%20Code.png "QR Code")
