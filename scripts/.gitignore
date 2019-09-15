@@ -1,3 +1,4 @@
-001_release-infra.sh
+001_release-base.sh
+002_release-infra.sh
 003_upload-containers.sh
 004_upload-release-app.sh
