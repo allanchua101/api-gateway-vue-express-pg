@@ -71,7 +71,6 @@ Resources:
         VPC: !GetAtt VPC.Outputs.VPC
         SecurityGroup: !GetAtt SecurityGroups.Outputs.ECSHostSecurityGroup
         Subnets: !GetAtt VPC.Outputs.PrivateSubnets
-    DependsOn: ContainerECR
 
   LifecycleHook:
     Type: AWS::CloudFormation::Stack
