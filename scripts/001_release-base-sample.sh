@@ -11,6 +11,10 @@ TEMPLATE_STORE_BUCKET_NAME="";
 # Variable containing name of ECR.
 ECR_NAME="";
 
+#==================================================================================
+# Non-Required variable names here...
+#==================================================================================
+
 # Variable containing the name of your cloudformation
 # stack name.
 TEMPLATE_STORE_STACK_NAME="template-store-stack";
