@@ -4,21 +4,55 @@ Description: >
   images for the application.
 
 Parameters:
-  EcrName:
-    Description: "Name of Elastic Container Registry."
+  BackendEcrName:
+    Description: "Name of backend ECR"
     Type: String
     AllowedPattern: ".+" # Required Parameter
-    ConstraintDescription: "ECR name is required."
+    ConstraintDescription: "Backend ECR name is required."
+
+  FrontendEcrName:
+    Description: "Name of frontend ECR"
+    Type: String
+    AllowedPattern: ".+" # Required Parameter
+    ConstraintDescription: "Frontend ECR name is required."
+
+  GatewayEcrName:
+    Description: "Name of API gateway ECR"
+    Type: String
+    AllowedPattern: ".+" # Required Parameter
+    ConstraintDescription: "API gateway ECR name is required."
 
 Resources:
-  ContainerECR:
+  BackendEcr:
     Type: AWS::ECR::Repository
     Properties:
-      RepositoryName: !Ref EcrName
+      RepositoryName: !Ref BackendEcrName
+
+  FrontendEcr:
+    Type: AWS::ECR::Repository
+    Properties:
+      RepositoryName: !Ref FrontendEcrName
+
+  GatewayEcr:
+    Type: AWS::ECR::Repository
+    Properties:
+      RepositoryName: !Ref GatewayEcrName
 
 Outputs:
-  ContainerEcrArn:
-    Value: !GetAtt ContainerECR.Arn
-    Description: "ARN of elastic container registry instance."
+  BackendEcrName:
+    Value: !Ref BackendEcr
+    Description: "Name of backend ECR"
     Export:
-      Name: "ContainerEcrArn"
+      Name: "BackendEcrName"
+
+  FrontendEcrName:
+    Value: !Ref FrontendEcr
+    Description: "Name of frontend ECR"
+    Export:
+      Name: "FrontendEcrName"
+
+  GatewayEcrName:
+    Value: !Ref GatewayEcr
+    Description: "Name of API Gateway ECR"
+    Export:
+      Name: "GatewayEcrName"

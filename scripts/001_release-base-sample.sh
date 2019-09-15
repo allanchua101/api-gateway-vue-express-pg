@@ -8,24 +8,18 @@ PROFILE_NAME="";
 # as a storage for your cloud formation templates.
 TEMPLATE_STORE_BUCKET_NAME="";
 
-# Variable containing name of ECR.
-ECR_NAME="";
+# Variable containing name of ECRs.
+BACKEND_ECR_NAME="";
+FRONTEND_ECR_NAME="";
+GATEWAY_ECR_NAME="";
 
 #==================================================================================
 # Non-Required variable names here...
 #==================================================================================
 
-# Variable containing the name of your cloudformation
-# stack name.
 TEMPLATE_STORE_STACK_NAME="template-store-stack";
-
-# Variable containing name of ECR.
 ECR_STACK_NAME="ecr-stack";
-
-# Variable containing path of infrastructure CF templates.
 INFRASTRUCTURE_FILES=./infrastructure/*.yaml
-
-# Variable containing path of pipeline CF templates.
 PIPELINE_FILES=./pipeline/*.yaml
 
 if [ -z "$PROFILE_NAME" ]
@@ -44,9 +38,25 @@ then
   exit 0
 fi
 
-if [ -z "$ECR_NAME" ]
+if [ -z "$BACKEND_ECR_NAME" ]
 then
-  echo "Please set the value of ECR_NAME variable inside the script."
+  echo "Please set the value of BACKEND_ECR_NAME variable inside the script."
+  echo "Press any key to exit...."
+  read
+  exit 0
+fi
+
+if [ -z "$FRONTEND_ECR_NAME" ]
+then
+  echo "Please set the value of FRONTEND_ECR_NAME variable inside the script."
+  echo "Press any key to exit...."
+  read
+  exit 0
+fi
+
+if [ -z "$GATEWAY_ECR_NAME" ]
+then
+  echo "Please set the value of GATEWAY_ECR_NAME variable inside the script."
   echo "Press any key to exit...."
   read
   exit 0
@@ -90,14 +100,15 @@ do
 done
 echo "================================================"
 
-# Ensure template storage exists.
 if ! aws cloudformation describe-stacks --profile "$PROFILE_NAME" --stack-name "$ECR_STACK_NAME" &> /dev/null ; then
   echo "Creating ECR cloudformation stack.."
   aws cloudformation create-stack \
     --profile "${PROFILE_NAME}" \
     --stack-name "${ECR_STACK_NAME}" \
     --template-body file://pipeline/ecr.yaml \
-    --parameters ParameterKey=EcrName,ParameterValue="${ECR_NAME}" &> /dev/null
+    --parameters ParameterKey=BackendEcrName,ParameterValue="${BACKEND_ECR_NAME}" \
+    ParameterKey=FrontendEcrName,ParameterValue="${FRONTEND_ECR_NAME}" \
+    ParameterKey=GatewayEcrName,ParameterValue="${GATEWAY_ECR_NAME}"
 
   echo "Waiting ECR cloudformation stack.."
   aws cloudformation wait stack-create-complete \
