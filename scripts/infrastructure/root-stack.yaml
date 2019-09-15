@@ -83,6 +83,26 @@ Resources:
         ECSAutoScalingGroupName: !GetAtt ECS.Outputs.ECSAutoScalingGroupName
 
 Outputs:
-  ApiGWServiceUrl:
-    Description: The URL endpoint for the API Gateway
-    Value: !Join ["/", [!GetAtt ALB.Outputs.LoadBalancerUrl, "/"]]
+  ApiGwDemoEcsVpc:
+    Value: !GetAtt VPC.Outputs.VPC
+    Description: "VPC used by ECS Cluster"
+    Export:
+      Name: "ApiGwDemoEcsVpc"
+
+  ApiGwDemoEcsCluster:
+    Value: !GetAtt ECS.Outputs.Cluster
+    Description: "ECS Cluster to utilize"
+    Export:
+      Name: "ApiGwDemoEcsCluster"
+
+  ApiGwDemoAlbListener:
+    Value: !GetAtt ALB.Outputs.Listener
+    Description: "ALB Listener"
+    Export:
+      Name: "ApiGwDemoAlbListener"
+
+  ApiGwDemoEcsServiceAutoScalingRole:
+    Value: !GetAtt ECS.Outputs.ECSServiceAutoScalingRole
+    Description: "ECS Auto Scaling Role"
+    Export:
+      Name: "ApiGwDemoEcsServiceAutoScalingRole"
