@@ -1,0 +1,24 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >
+  This template deploys an Elastic Container Registry (ECR) that will host all docker
+  images for the application.
+
+Parameters:
+  EcrName:
+    Description: "Name of Elastic Container Registry."
+    Type: String
+    AllowedPattern: ".+" # Required Parameter
+    ConstraintDescription: "ECR name is required."
+
+Resources:
+  ContainerECR:
+    Type: AWS::ECR::Repository
+    Properties:
+      RepositoryName: !Ref EcrName
+
+Outputs:
+  ContainerEcrArn:
+    Value: !GetAtt ContainerECR.Arn
+    Description: "ARN of elastic container registry instance."
+    Export:
+      Name: "ContainerEcrArn"

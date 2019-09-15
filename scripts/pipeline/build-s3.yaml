@@ -1,0 +1,23 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >
+  This template deploys an S3 bucket that will contain CF templates and builds.
+
+Parameters:
+  BucketName:
+    Description: "Name of s3 bucket that will be used for storing templates."
+    Type: String
+    AllowedPattern: ".+" # Required Parameter
+    ConstraintDescription: "Bucket name is required."
+
+Resources:
+  TemplateStorageBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref BucketName
+
+Outputs:
+  TemplateStorageBucketName:
+    Value: !Ref TemplateStorageBucket
+    Description: "Name of template S3 bucket."
+    Export:
+      Name: "TemplateStorageBucket"
