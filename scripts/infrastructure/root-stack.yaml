@@ -10,27 +10,18 @@ Description: >
   Tt then deploys a pair of API Gateway (see gateway folder), Backend API (see backend folder) and Frontend App 
   (see frontend folder) which are published on the Elastic Container Registry (ECR).
 
-Parameters: 
-  StackName: 
+Parameters:
+  StackName:
     Type: String
-    Default: 'vue-exp-apigw-ecs'
+    Default: "vue-exp-apigw-ecs"
     Description: Name of cloud formation stack to provision.
-  
+
   TemplateS3BucketUrl:
     Type: String
-    AllowedPattern : '.+' # Required Parameter
+    AllowedPattern: ".+" # Required Parameter
     Description: URL of s3 bucket that will contain the cloud formation scripts. (eg. https://s3.amazonaws.com/YOUR_S3_BUCKET_NAME)
 
 Resources:
-  ContainerECR:
-    Type: AWS::CloudFormation::Stack
-    Properties:
-      TemplateURL: !Sub
-        - ${TemplateS3BucketUrl}/infrastructure/ecr.yaml
-        - { TemplateS3BucketUrl: !Ref TemplateS3BucketUrl }
-      Parameters:
-        EnvironmentName: !Ref AWS::StackName
-
   VPC:
     Type: AWS::CloudFormation::Stack
     Properties:
