@@ -1,5 +1,5 @@
 Description: >
-  This is an example of a long running ECS service that serves as an API Gateway.
+  This is an example of a long running ECS service that serves a JSON APIs.
 Parameters:
   VPC:
     Description: The VPC that the ECS cluster is deployed to
@@ -21,7 +21,16 @@ Parameters:
   Path:
     Description: The path to register with the Application Load Balancer
     Type: String
-    Default: /
+    Default: /api/*
+
+  ContainerUri:
+    Description: URI of container image.
+    Type: String
+
+  ApiPort:
+    Description: Port of backend container.
+    Type: Number
+    Default: 3000
 
 Resources:
   Service:
@@ -33,21 +42,21 @@ Resources:
       DesiredCount: !Ref DesiredCount
       TaskDefinition: !Ref TaskDefinition
       LoadBalancers:
-        - ContainerName: "gateway-service"
-          ContainerPort: 80
+        - ContainerName: "backend-service"
+          ContainerPort: !Ref ApiPort
           TargetGroupArn: !Ref TargetGroup
 
   TaskDefinition:
     Type: AWS::ECS::TaskDefinition
     Properties:
-      Family: gateway-service
+      Family: "backend-service"
       ContainerDefinitions:
-        - Name: gateway-service
+        - Name: "backend-service"
           Essential: true
-          Image: '' # Pass an ECR parameter here.
-          Memory: 256
+          Image: !Ref ContainerUri
+          Memory: 128
           PortMappings:
-            - ContainerPort: 80
+            - ContainerPort: !Ref ApiPort
           LogConfiguration:
             LogDriver: awslogs
             Options:
@@ -58,7 +67,7 @@ Resources:
     Type: AWS::Logs::LogGroup
     Properties:
       LogGroupName: !Ref AWS::StackName
-      RetentionInDays: 64
+      RetentionInDays: 365
 
   TargetGroup:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
@@ -69,7 +78,7 @@ Resources:
       Matcher:
         HttpCode: 200-299
       HealthCheckIntervalSeconds: 10
-      HealthCheckPath: /healthcheck
+      HealthCheckPath: /api/users/list
       HealthCheckProtocol: HTTP
       HealthCheckTimeoutSeconds: 5
       HealthyThresholdCount: 2
@@ -78,7 +87,7 @@ Resources:
     Type: AWS::ElasticLoadBalancingV2::ListenerRule
     Properties:
       ListenerArn: !Ref Listener
-      Priority: 2
+      Priority: 1
       Conditions:
         - Field: path-pattern
           Values:
@@ -122,9 +131,9 @@ Resources:
                         "elasticloadbalancing:DeregisterTargets",
                         "elasticloadbalancing:DescribeTargetGroups",
                         "elasticloadbalancing:DescribeTargetHealth",
-                        "elasticloadbalancing:RegisterTargets"
+                        "elasticloadbalancing:RegisterTargets",
                       ],
-                    "Resource": "*"
-                  }
-                ]
+                    "Resource": "*",
+                  },
+                ],
             }

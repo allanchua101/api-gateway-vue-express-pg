@@ -1,0 +1,49 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >
+  Bundle used for defining ECS Services and Tasks.
+
+Parameters:
+  TemplateS3BucketUrl:
+    Type: String
+    AllowedPattern: ".+" # Required Parameter
+    Description: URL of s3 bucket that will contain the cloud formation scripts. (eg. https://s3.amazonaws.com/YOUR_S3_BUCKET_NAME)
+
+  BackendImageUri:
+    Type: String
+    AllowedPattern: ".+" # Required Parameter
+    Description: "URI of backend image."
+
+  FrontendImageUri:
+    Type: String
+    AllowedPattern: ".+" # Required Parameter
+    Description: "URI of frontend image."
+
+Resources:
+  ProductService:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: !Sub
+        - ${TemplateS3BucketUrl}/services/api-service.yaml
+        - { TemplateS3BucketUrl: !Ref TemplateS3BucketUrl }
+      Parameters:
+        VPC: !ImportValue ApiGwDemoEcsVpc
+        Cluster: !ImportValue ApiGwDemoEcsCluster
+        DesiredCount: 2
+        Listener: !ImportValue ApiGwDemoAlbListener
+        Path: /api/*
+        ContainerUri: !Ref BackendImageUri
+
+  WebsiteService:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: !Sub
+        - ${TemplateS3BucketUrl}/services/frontend-service.yaml
+        - { TemplateS3BucketUrl: !Ref TemplateS3BucketUrl }
+      Parameters:
+        VPC: !ImportValue ApiGwDemoEcsVpc
+        Cluster: !ImportValue ApiGwDemoEcsCluster
+        DesiredCount: 2
+        Listener: !ImportValue ApiGwDemoAlbListener
+        Path: /*
+        ECSServiceAutoScalingRoleARN: !ImportValue ApiGwDemoEcsServiceAutoScalingRole
+        ContainerUri: !Ref FrontendImageUri
