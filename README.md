@@ -42,18 +42,6 @@ To access GUI, navigate to [http://localhost:52793](http://localhost:52793)
 
 To hit an API, navigate to [http://localhost:52793/v1/api/users/list](http://localhost:52793/v1/api/users/list)
 
-### Manually Deploy Cloud Formation Stack via AWS CLI :cloud:
-
-The script below is used for automating deployment of Infrastructure. I'm still on the process of writing pipeline provisioning scripts and application-level automation components.
-
-```sh
-# Navigate to scripts folder and run the following command
-aws cloudformation create-stack --stack-name my-stack-name \ 
-  --template-body file://root-stack.yml --profile YOUR_AWS_PROFILE_NAME \ 
-  --parameters ParameterKey=TemplateS3BucketUrl,ParameterValue=YOUR_S3_URL_HERE \
-  --capabilities CAPABILITY_NAMED_IAM
-```
-
 ### TLDR;
 I'm writing about API gateways in my blog @ [https://www.pogsdotnet.com](https://www.pogsdotnet.com)
   
