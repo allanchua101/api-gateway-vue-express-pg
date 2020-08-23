@@ -44,9 +44,3 @@ To hit an API, navigate to [http://localhost:52793/v1/api/users/list](http://loc
 
 ### TLDR;
 I'm writing about API gateways in my blog @ [https://www.pogsdotnet.com](https://www.pogsdotnet.com)
-  
-### Buy me a beer so I can code more? :beer:
-
-If your'e happy with my repository, I don't take TYs, send me a beer instead :smile:
-
-![QR Code](https://github.com/allanchua101/api-gateway-vue-express-pg/blob/master/QR%20Code.png "QR Code")
